@@ -1,0 +1,25 @@
+version: "3.9"  # optional since v1.27.0
+services:
+    cssource:
+        build:
+            context: .
+            dockerfile: cssource.dockerfile
+        ports:
+            - "27015:27015/udp"
+        volumes:
+            - cstrike_cfg:/app/cstrike/cfg
+            - cstrike_maps:/app/cstrike/maps
+    nginx:
+        build:
+            context: .
+            dockerfile: nginx.dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - cstrike_cfg:/app/cstrike/cfg
+            - cstrike_maps:/app/cstrike/maps
+        depends_on:
+            - cssource
+volumes:
+    cstrike_cfg: { }
+    cstrike_maps: { }
