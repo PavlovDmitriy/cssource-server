@@ -13,7 +13,8 @@ services:
             context: .
             dockerfile: nginx.dockerfile
         ports:
-            - "8080:80"
+            - "27080:80"
+            - "27081:81"
         volumes:
             - data:/data
         depends_on:
