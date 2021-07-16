@@ -6,4 +6,4 @@ COPY ./cstrike/ /data/cstrike/
 
 WORKDIR /data
 
-CMD ["./srcds_run", "-game cstrike +map de_dust2 -port 27015"]
+ENTRYPOINT ["./srcds_run", "-game", "cstrike", "+map", "de_dust2", "-port", "27015"]
