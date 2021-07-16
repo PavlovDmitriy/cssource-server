@@ -1,23 +1,11 @@
-# escape=`
-FROM lacledeslan/gamesvr-cssource
+FROM steamcmd/steamcmd:latest
 
-COPY --chown=CSSource:root ./sourcemod.linux /app/cstrike/
+RUN steamcmd +login anonymous +force_install_dir /data +app_update 232330 +quit;
 
-COPY --chown=CSSource:root ./sourcemod-configs /app/cstrike/
-
-COPY --chown=CSSource:root ./dist /app/
-
-COPY --chown=CSSource:root ./ll-tests/*.sh /app/ll-tests
-
-RUN usermod -l CSSourceFreeplay CSSource && `
-    chmod +x /app/ll-tests/*.sh;
-
-USER CSSourceFreeplay
-
-WORKDIR /app/
-
-ONBUILD USER root
+COPY ./cstrike /data/cstrike
 
 EXPOSE 27015
+
+WORKDIR /data
 
 CMD ["./srcds_run", "-game", "cstrike", "+map", "de_dust2", "-port", "27015"]

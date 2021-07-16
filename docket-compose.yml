@@ -7,8 +7,7 @@ services:
         ports:
             - "27015:27015/udp"
         volumes:
-            - cstrike_cfg:/app/cstrike/cfg
-            - cstrike_maps:/app/cstrike/maps
+            - data:/data
     nginx:
         build:
             context: .
@@ -16,10 +15,8 @@ services:
         ports:
             - "8080:80"
         volumes:
-            - cstrike_cfg:/app/cstrike/cfg
-            - cstrike_maps:/app/cstrike/maps
+            - data:/data
         depends_on:
             - cssource
 volumes:
-    cstrike_cfg: { }
-    cstrike_maps: { }
+    data: { }
