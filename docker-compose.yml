@@ -8,7 +8,7 @@ services:
             - "27016:27016/tcp"
             - "27016:27016/udp"
         volumes:
-            - data:/data
+            - csgo_data:/data
         restart: unless-stopped
     cssource:
         build:
@@ -18,7 +18,7 @@ services:
             - "27015:27015/tcp"
             - "27015:27015/udp"
         volumes:
-            - data:/data
+            - css_data:/data
         restart: unless-stopped
     nginx:
         build:
@@ -28,9 +28,10 @@ services:
             - "27080:80"
             - "27081:81"
         volumes:
-            - data:/data
+            - css_data:/data
         depends_on:
             - cssource
         restart: unless-stopped
 volumes:
-    data: { }
+    css_data: { }
+    csgo_data: { }
