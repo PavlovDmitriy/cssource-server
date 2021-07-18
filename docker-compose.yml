@@ -1,5 +1,15 @@
 version: "3.9"  # optional since v1.27.0
 services:
+    csgo:
+        build:
+            context: .
+            dockerfile: csgo.dockerfile
+        ports:
+            - "27016:27016/tcp"
+            - "27016:27016/udp"
+        volumes:
+            - data:/data
+        restart: unless-stopped
     cssource:
         build:
             context: .
